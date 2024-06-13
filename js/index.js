@@ -1,29 +1,29 @@
+
+
 const inputSubmit = document.querySelector("#enviar")
 
 const inputText = document.querySelector("#palabra")
 
+const res = []
+
+
 inputSubmit.addEventListener('click', function(e){
     e.preventDefault()
-    console.log(e.target);
-    console.log(inputText.value);
     getData(inputText.value);
 });
 
 
-let data = []
-
-async function getData(p) {
-    try {
-      const response = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${p}`);
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      data = await response.json();
-      console.log(data);
-    } catch (error) {
-      console.error(error);
+function getData(p){
+fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${p}`) 
+    .then(response => response.json()) 
+    .then(data => {console.log(data)
+        let cad=`
+        <p>Como se pronuncia: ${data[0].phonetics[1].text}</p>
+        <audio src="${data[0].phonetics[0].audio}" controls>
+        </audio>
+        `
+        document.querySelector(".container").innerHTML=cad
     }
-  }
- 
 
-  console.log(data);
+);
+}
