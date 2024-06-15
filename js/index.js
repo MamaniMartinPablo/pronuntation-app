@@ -31,6 +31,7 @@ fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${p}`)
             if (data[0].phonetics[0].text) {
                 cad = cad + ` 
                 <p>Se pronuncia como: ${data[0].phonetics[1].text}</p>
+                <a href="${data[0].sourceUrls[0]}">Mas</a>
                 `
             }
             cad = cad + ` 
@@ -42,6 +43,7 @@ fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${p}`)
                 <audio src="${data[0].phonetics[1].audio}" controls>
                 </audio>
                 <p>Se pronuncia como: ${data[0].phonetics[1]?.text}</p>
+                <a href="${data[0].sourceUrls[0]}">Mas</a>
                 `
                 }else{
                     if (data[0].phonetics[2].hasOwnProperty("sourceUrl")) {
@@ -50,6 +52,7 @@ fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${p}`)
                     <audio src="${data[0].phonetics[2].audio}" controls>
                     </audio>
                     <p>Se pronuncia como: ${data[0].phonetics[1]?.text}</p>
+                    <a href="${data[0].sourceUrls[0]}">Mas</a>
                     `
                     }
                 }
